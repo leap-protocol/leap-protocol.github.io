@@ -7,14 +7,14 @@ The protocol is configured using a json file.
 
 # Purpose
 
-The RoBus protocol is designed to:
+The L3aP protocol is designed to:
 * Provide intuitive protocol configuration
 * Speed up development/debugging on the comms layer
 
 # Configuration
 
 The json file has the following root schema:
-* version: the current semver of the RoBus protocol
+* version: the current semver of the L3aP protocol
 * category: a map of start characters used in packets
 * separator: protocol separator character
 * compound: protocol compound character
@@ -23,13 +23,13 @@ The json file has the following root schema:
 
 ### Version
 
-Version is a semvar version with major, minor and patch numbers. This version relates to the RoBus protocol itself. Its purpose is to determine compatability.
+Version is a semvar version with major, minor and patch numbers. This version relates to the L3aP protocol itself. Its purpose is to determine compatability.
 
 ### Category
 
 Category characters determine how the receiving application should interpret a packet.
 
-The RoBus protocol defines six categories by default. However, an application may define more categories when needed.
+The L3aP protocol defines six categories by default. However, an application may define more categories when needed.
 
 ### Separator, Compound, End characters
 
@@ -125,7 +125,7 @@ Where:
 ### Category
 The first character of a packet is always a category character. This specifies how the packet should be interpretted.
 
-RoBus defines the following catergories by default:
+L3aP defines the following catergories by default:
 
 | Category    | Default encoding | Description |
 | ---         | ---              | ---         |
