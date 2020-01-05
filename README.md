@@ -1,7 +1,7 @@
 
 Packets are human interprettable/enterable: 
 
-`S10C0:00:cf000000\n`
+`S10c0:00:cf000000\n`
 
 The protocol is configured using a json file.
 
@@ -102,9 +102,11 @@ Valid types:
 * string: "string"
 * boolean: "bool"
 * enumeration: [ "item1", "item2", ...]
+* none: "none"
 
 For enumerations, the item names are user defined - these get encoded as integers. An enumeration can have no more than 256 entries.
 
+None types can be sent when the path itself is the command. For example, an application may have a path of `control/mode/disable` which does not require an accompanying payload.
 
 # Packets
 
@@ -156,6 +158,7 @@ Data typing is inferred from the address and configuration, it is not carried in
 | Double            | IEEE 754 binary 64, 16 characters |
 | Bool              | Single character, only '0' or '1' is valid |
 | Enumeration       | 2 characters to represent an unsigned 8-bit integer - enumerations are limited to 256 values |
+| None              | Not applicable |
 
 ### End
 
@@ -163,7 +166,15 @@ Packets terminate with an end character. The default end character is `\n`.
 
 ### Compound
 
-Instead of an end charactor, packets can be combined using a compound character. The purpose of a compound character is to ensure sets of data are processed together.
+An typical compound packet looks like:
+
+`P13e7:00:cf000000|P8100:132a|P8210:a8903456:b499ff00\n`
+
+Instead of an end charactor, packets are combined using a compound character. 
+
+The advantage of compound packets is to ensure sets of data are processed together.
+
 The default compound character is `|`.
+
 
 
