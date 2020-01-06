@@ -19,7 +19,7 @@ The json file has the following root schema:
 * separator: protocol separator character
 * compound: protocol compound character
 * end: protocol end character
-* _data: the root of the applications data map
+* data: the root of the applications data map
 
 ### Version
 
