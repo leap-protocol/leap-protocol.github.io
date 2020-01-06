@@ -23,7 +23,7 @@ The json file has the following root schema:
 
 ### Version
 
-Version is a semvar version with major, minor and patch numbers. This version relates to the L3aP protocol itself. Its purpose is to determine compatability.
+Version is a semvar version with major, minor and patch numbers. This version relates to the L3aP protocol itself. Its purpose is to determine compatability. In leap packages, major and minor versions should always match the leap protocol spec, patch versions may not.
 
 ### Category
 
@@ -40,27 +40,27 @@ These configuration items define the utf-8 characters used in encoded packets. T
 
 ### Data
 
-The `_data` field is a heirachical structure of user defined data.
+The `data` field is a heirachical structure of user defined data.
  
 ```json
-"_data" : [
-  { "sensor" : { "_addr": "8000", "_data": [
-    { "imu": { "_addr": "00A0", "_data": [
-      { "accel": { "_data": [
-        { "x": { "_type": "float" } }, 
-        { "y": { "_type": "float" } }, 
-        { "z": { "_type": "float" } }
+"data" : [
+  { "sensor" : { "addr": "8000", "data": [
+    { "imu": { "addr": "00A0", "data": [
+      { "accel": { "data": [
+        { "x": { "type": "float" } }, 
+        { "y": { "type": "float" } }, 
+        { "z": { "type": "float" } }
       ]}},
-      { "gyros": { "_data": [
-        { "x": { "_type": "float" } },
-        { "y": { "_type": "float" } },
-        { "z": { "_type": "float" } }
+      { "gyros": { "data": [
+        { "x": { "type": "float" } },
+        { "y": { "type": "float" } },
+        { "z": { "type": "float" } }
       ]}},
     ]}},
-    { "temperature": { "_addr": "00C0", "_type": "float" } },
-    { "barometer": { "_type": "float" } }
+    { "temperature": { "addr": "00C0", "type": "float" } },
+    { "barometer": { "type": "float" } }
   ]}},
-  { "timestamp_ms": { "_addr": "9000", "_type": "u64" }}
+  { "timestamp_ms": { "addr": "9000", "type": "u64" }}
 ] 
 ```
 
@@ -90,7 +90,7 @@ Addresses:
 * Addresses never exceed 16-bits.
 
 Items
-* An item must have either a `"_data"` array or `"_type"` string
+* An item must have either a `"data"` array or `"type"` string
 * Items are placed in arrays to *guarantee* order (its a JSON thing)
 * Item names must start with a character and can only contain characters, numbers, dashes and underscores `/^[a-z][\w\-_]*$/i`
 
@@ -166,9 +166,9 @@ Packets terminate with an end character. The default end character is `\n`.
 
 ### Compound
 
-An typical compound packet looks like:
+A typical compound packet looks like:
 
-`P13e7:00:cf000000|P8100:132a|P8210:a8903456:b499ff00\n`
+`P13e7:00:cf000000|8100:132a|8210:a8903456:b499ff00\n`
 
 Instead of an end charactor, packets are combined using a compound character. 
 
