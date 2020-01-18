@@ -1,9 +1,18 @@
+[![](https://github.com/leap-protocol/leap-py/workflows/L3aP-Py%20Testing/badge.svg)](https://github.com/leap-protocol/leap-py) [![](https://github.com/leap-protocol/leap-js/workflows/L3aP-JS%20Testing/badge.svg)](https://github.com/leap-protocol/leap-js)
+
+For python:
+`pip install leap-protocol`
+
+For javascript:
+`node install leap-protocol`
+
+# Premise
 
 Packets are human interprettable/enterable: 
 
 `S10c0:00:cf000000\n`
 
-The protocol is configured using a json file.
+The protocol is configured using a yaml/json/toml file.
 
 # Purpose
 
@@ -176,5 +185,113 @@ The advantage of compound packets is to ensure sets of data are processed togeth
 
 The default compound character is `|`.
 
+# Configuration Files
+
+L3aP can be configured using yaml, json or toml files.
+
+Yaml files are probably the easiest to maintain.
+
+**Example yaml file**
+
+```yaml
+separator: ":"
+compound: "|"
+end: "\n"
+
+version:
+  major: 1
+  minor: 0
+  patch: 0
+
+category:
+  get: "G"
+  set: "S"
+  ack: "A"
+  nak: "N"
+  sub: "B"
+  pub: "P"
+
+data:
+  - item-1:
+      addr: "0000"
+      data:
+        - child-1:
+            data:
+            - grand-child-1: { type: "u8" }
+            - grand-child-2: { type: "float" }
+        - child-2: { type: "string" }
+  - item-2: { addr: "2000", type: "none" }
+```
+
+**Example json file**
+
+```json
+{
+  "separator": ":",
+  "compound": "|",
+  "end": "\n",
+
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  
+  "category": {
+    "get": "G",
+    "set": "S",
+    "ack": "A",
+    "nak": "N",
+    "sub": "B",
+    "pub": "P"
+  },
+  
+  "data": [
+    { "item-1": { "addr": "0000", "data": [
+      { "child-1": { "data": [
+        { "grand-child-1": { "type": "u8"  } },
+        { "grand-child-2": { "type": "float"  } }
+      ] } },
+      { "child-2": { "type": "none" } }
+    ] } },
+    { "item-2": { "addr": "2000", "type":  "none" } }
+  ]
+}
+```
+
+**Example toml file**
+
+```toml
+separator = ":"
+compound = "|"
+end = "\n"
+
+[version]
+  major = 1
+  minor = 0
+  patch = 0
+
+[category]
+  get = "G"
+  set = "S"
+  ack = "A"
+  nak = "N"
+  sub = "B"
+  pub = "P"
+
+[[data]]
+  [data.item-1]
+    addr = "0000"
+    [[data.item-1.data]]
+      [data.item-1.data.child-1]
+        [[data.item-1.data.child-1.data]]
+          grand-child-1 = { type = "u8" }
+        [[data.item-1.data.child-1.data]]
+          grand-child-2 = { type = "float" }
+    [[data.item-1.data]]
+      child-2 = { type = "none" }
+[[data]]
+  item-2 = { addr = "2000", type = "none" }
+```
 
 
