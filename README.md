@@ -1,10 +1,12 @@
 [![](https://github.com/leap-protocol/leap-py/workflows/L3aP-Py%20Testing/badge.svg)](https://github.com/leap-protocol/leap-py) [![](https://github.com/leap-protocol/leap-js/workflows/L3aP-JS%20Testing/badge.svg)](https://github.com/leap-protocol/leap-js)
 
 For python:
-`pip install leap-protocol`
+* install `pip install leap-protocol`
+* [documentation](https://leap-protocol.github.io/leap-py/)
 
 For javascript:
-`node install leap-protocol`
+* install `node install leap-protocol`
+* [documentation](https://leap-protocol.github.io/leap-js/)
 
 # Premise
 
