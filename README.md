@@ -10,7 +10,7 @@ For javascript:
 
 # Premise
 
-Packets are human interprettable/enterable: 
+Packets are human interprettable/enterable:
 
 `S10c0:00:cf000000\n`
 
@@ -52,14 +52,14 @@ These configuration items define the utf-8 characters used in encoded packets. T
 ### Data
 
 The `data` field is a heirachical structure of user defined data.
- 
+
 ```json
 "data" : [
   { "sensor" : { "addr": "8000", "data": [
     { "imu": { "addr": "00A0", "data": [
       { "accel": { "data": [
-        { "x": { "type": "float" } }, 
-        { "y": { "type": "float" } }, 
+        { "x": { "type": "float" } },
+        { "y": { "type": "float" } },
         { "z": { "type": "float" } }
       ]}},
       { "gyros": { "data": [
@@ -71,8 +71,8 @@ The `data` field is a heirachical structure of user defined data.
     { "temperature": { "addr": "00C0", "type": "float" } },
     { "barometer": { "type": "float" } }
   ]}},
-  { "timestamp_ms": { "addr": "9000", "type": "u64" }}
-] 
+  { "timestamp_ms": { "addr": "9000", "type": "u32" }}
+]
 ```
 
 Results in the following address mapping:
@@ -80,7 +80,7 @@ Results in the following address mapping:
 | path                  | 16-bit address  | type                    |
 | ---                   | ---             | ---                     |
 | *sensor*              | *0x8000*        | -                       |
-| *sensor/imu*          | *0x80A0*        | -                       | 
+| *sensor/imu*          | *0x80A0*        | -                       |
 | *sensor/imu/accel*    | *0x80A1*        | -                       |
 | *sensor/imu/accel/x*  | *0x80A2*        | float                   |
 | *sensor/imu/accel/y*  | *0x80A3*        | float                   |
@@ -91,7 +91,7 @@ Results in the following address mapping:
 | *sensor/imu/gyros/z*  | *0x80A8*        | float                   |
 | *sensor/temperature*  | *0x80C0*        | float                   |
 | *sensor/barometer*    | *0x80C1*        | float                   |
-| *timestamp_ms*        | *0x9000*        | unsigned integer 64-bit |
+| *timestamp_ms*        | *0x9000*        | unsigned integer 32-bit |
 
 Addresses:
 * Addresses are always four character hexidecimal strings `/[0-9a-f]{4}/i`
@@ -106,8 +106,8 @@ Items
 * Item names must start with a character and can only contain characters, numbers, dashes and underscores `/^[a-z][\w\-_]*$/i`
 
 Valid types:
-* *unsigned integers*: "u8", "u16", "u32", "u64"
-* *signed integers*: "i8", "i16", "i32", "i64"
+* *unsigned integers*: "u8", "u16", "u32"
+* *signed integers*: "i8", "i16", "i32"
 * float 32-bit: "float"
 * float 64-bit: "double"
 * string: "string"
@@ -181,7 +181,7 @@ A typical compound packet looks like:
 
 `P13e7:00:cf000000|8100:132a|8210:a8903456:b499ff00\n`
 
-Instead of an end charactor, packets are combined using a compound character. 
+Instead of an end charactor, packets are combined using a compound character.
 
 The advantage of compound packets is to ensure sets of data are processed together.
 
@@ -238,7 +238,7 @@ data:
     "minor": 0,
     "patch": 0
   },
-  
+
   "category": {
     "get": "G",
     "set": "S",
@@ -247,7 +247,7 @@ data:
     "sub": "B",
     "pub": "P"
   },
-  
+
   "data": [
     { "item-1": { "addr": "0000", "data": [
       { "child-1": { "data": [
